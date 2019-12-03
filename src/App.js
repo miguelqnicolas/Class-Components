@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ToDoList from './ToDoList';
+import ToDoForm from './ToDoForm';
 
 class App extends Component {
 	// you will need a place to store your state in this component.
@@ -9,22 +10,34 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			task: '',
-			id: Date.now(),
-			completed: false
+			tasks: [
+				{
+					task: 'Laundry',
+					id: Date.now(),
+					completed: false
+				}
+			]
 		};
 	};
 
-	// handler functions here
-	// changeHandler = (event) => {
-	// 	this.setState.task = event.target.value;
-	// };
+	addTask = task => {
+		const newTask = {
+			task: task,
+			id: Date.now(),
+			completed: false
+		};
+		
+		this.setState({
+			tasks: [...this.state.tasks, newTask]
+		});
+	};
 
 	render() {
 		return (
 			<div>
 				<h2>To Do:</h2>
-				<ToDoList/>
+				<ToDoForm addTask={this.addTask}/>
+				<ToDoList state={this.state.tasks}/>
 			</div>
 		);
 	}
