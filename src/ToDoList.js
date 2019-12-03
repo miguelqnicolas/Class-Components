@@ -4,7 +4,7 @@ import ToDo from './ToDo';
 const ToDoList = props => (
     <>
         {props.state.map(item => (
-            <button key={item.id}> <ToDo task={item.task} completed={item.completed}/> </button>
+            <ToDo toggleCompleted={props.toggleCompleted} key={item.id} item={item}/>
         ))}
     </>
 )
