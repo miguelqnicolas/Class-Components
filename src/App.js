@@ -3,10 +3,6 @@ import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
 
 class App extends Component {
-	// you will need a place to store your state in this component.
-	// design `App` to be the parent component of your application.
-	// this component is going to take care of state, and any change handlers you need to work with your state
-	
 	constructor() {
 		super();
 		this.state = {
@@ -33,15 +29,23 @@ class App extends Component {
 	};
 
 	toggleCompleted = id => {
-		this.setState ({
-			todos: this.state.tasks.map(item => {
+		this.setState({
+			tasks: this.state.tasks.map(item => {
 				if (item.id === id) {
 					return {...item, completed: !item.completed}
 				}
 				return item;
 			})
 		})
-	  }
+	};
+
+	removeCompleted = () => {
+		this.setState({
+			tasks: this.state.tasks.filter(item => {
+				return item.completed === false;
+			})
+		});
+	};
 
 	render() {
 		return (
@@ -49,6 +53,7 @@ class App extends Component {
 				<h2>To Do:</h2>
 				<ToDoForm addTask={this.addTask}/>
 				<ToDoList state={this.state.tasks} toggleCompleted={this.toggleCompleted}/>
+				<button onClick={this.removeCompleted}>Remove Completed</button>
 			</div>
 		);
 	}

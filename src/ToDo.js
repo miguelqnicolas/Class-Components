@@ -3,7 +3,7 @@ import './ToDo.css';
 
 const ToDo = props => {
     const clickHandler = () => {
-        props.toggleCompleted(props.item.id)
+        props.toggleCompleted(props.item.id);
     };
     
     return (
